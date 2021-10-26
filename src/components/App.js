@@ -25,7 +25,7 @@ function App() {
   const [isConfirmPopupOpen, setIsConfirmPopupOpen] = React.useState(false);
   const [isImagePopupOpen, setImagePopupOpen] = React.useState(false);
   const [loggedIn, setLoggedIn] = React.useState(false);
-  const [tooltipStatus, setTooltipStatus] = React.useState('');
+  const [tooltipStatus, setTooltipStatus] = React.useState(false);
   const [isInfoToolTipOpen, setIsInfoToolTipOpen] = React.useState(false);
   const [userEmail, setUserEmail] = React.useState('');
   const [selectedCard, setSelectedCard] = React.useState({ link: '', name: '' });
@@ -71,7 +71,7 @@ function App() {
         history.push('/');
       })
       .catch((err) => {
-        console.error(err)
+        console.log(err)
       })
     }
   }, [history]);
@@ -173,7 +173,6 @@ function App() {
     setImagePopupOpen(false);
     setIsConfirmPopupOpen(false);
     setSelectedCard({ link: '', name: '' });
-    setTooltipStatus('');
     setIsInfoToolTipOpen(false);
   }
 
@@ -188,9 +187,8 @@ function App() {
           return;
         }
       })
-      .catch((err) => {
-        console.error(err)
-        setTooltipStatus('fail')
+      .catch(err => {
+        console.log(err); 
       });
   }
 
@@ -198,14 +196,14 @@ function App() {
     return auth.register(email, password)
       .then((res) => {
         if (res.data._id) {
-          setTooltipStatus('success');
+          setTooltipStatus(true);
           setIsInfoToolTipOpen(true);
           history.push('/sign-in');
         }
       })
       .catch((err) => {
-        console.error(err);
-        setTooltipStatus('fail');
+        console.log(err);
+        setTooltipStatus(false);
         setIsInfoToolTipOpen(true);
       });
   }

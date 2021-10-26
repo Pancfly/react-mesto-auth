@@ -14,12 +14,9 @@ function Register({ onRegister }) {
   }
 
   function handleSubmit(e) {
-    let { email, password } = userData;
+    const { email, password } = userData;
     e.preventDefault();
-    onRegister({ email, password })
-      .catch(err => {
-        console.error(err)
-      })
+    onRegister({ email, password });
   }
 
   return (
